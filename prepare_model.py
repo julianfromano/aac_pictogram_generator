@@ -12,7 +12,7 @@ clip_model.to(device)
 
 # --- Descargar keywords de ARASAAC filtrados por "food" ---
 def fetch_arasaac_food_keywords(language="es"):
-    print("📥 Descargando keywords desde ARASAAC...")
+    print("Descargando keywords desde ARASAAC")
     url = f"https://api.arasaac.org/v1/pictograms/{language}/search/food"
     response = requests.get(url)
 
@@ -33,5 +33,5 @@ nlp = spacy.load("es_core_news_lg")  # Modelo mediano con vectores
 
 arasaac_keywords=fetch_arasaac_food_keywords()
 
-# Preprocesar keywords para spaCy docs, solo aquellos con vector
+# Preprocesar keywords para spaCy docs
 keyword_docs = [(kw, nlp(kw)) for kw in arasaac_keywords if nlp(kw).has_vector]
